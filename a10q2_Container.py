@@ -5,6 +5,7 @@
     Instructor: Jeffrey Long
 """
 
+
 class Container(object):
     def __init__(self):
         self._size = 0  # how many elements in the stack
