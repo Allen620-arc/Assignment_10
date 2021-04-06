@@ -1,5 +1,6 @@
 import SuperNode as N
 
+
 class LocationNode(N.SuperNode):
     def __init__(self, value=None, next_node=None):
         """
@@ -79,11 +80,8 @@ class LocationNode(N.SuperNode):
                 walker = walker.get_next_location()
                 value = walker.get_current_location()
 
-                result += ' *-]-->[ '+str(value)+' |'
+                result += ' *-]-->[ ' + str(value) + ' |'
 
             result += ' / ]'
 
         return result
-
-    
-

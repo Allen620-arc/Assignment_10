@@ -1,5 +1,6 @@
 import LocationNode as LN
 
+
 class MobilityProfile(object):
     def __init__(self, aList=None):
         """
@@ -9,6 +10,7 @@ class MobilityProfile(object):
         Post-condition: A mobility profile is created
         Return: None
         """
+        self.aList = aList
 
     def create_profile(self, aList):
         """
@@ -33,5 +35,3 @@ class MobilityProfile(object):
             None
         Return: True if there is a match, False for otherwise.
         """
-
-
