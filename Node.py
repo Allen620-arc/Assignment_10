@@ -18,7 +18,6 @@ class Node(object):
         self.__data = data
         self.__next = next
 
-
     def get_data(self):
         """
         Retrieve the contents of the data field.
@@ -27,7 +26,6 @@ class Node(object):
         """
         return self.__data
 
-
     def get_next(self):
         """
         Retrieve the contents of the next field.
@@ -35,7 +33,6 @@ class Node(object):
             the value stored previously in the next field
         """
         return self.__next
-
 
     def set_data(self, val):
         """
@@ -49,7 +46,6 @@ class Node(object):
         """
         self.__data = val
 
-
     def set_next(self, val):
         """
         Set the contents of the next field to val.
@@ -61,4 +57,3 @@ class Node(object):
             none
         """
         self.__next = val
-

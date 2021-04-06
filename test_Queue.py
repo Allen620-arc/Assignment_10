@@ -20,6 +20,7 @@ def str_form(obj, result, exp, reason):
     Purpose:
         Abbreviate test case assertions.
     Preconditions:
+        :param exp:
         :param obj:  a string
         :param result: a value
         :param reason: a string

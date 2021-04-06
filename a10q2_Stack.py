@@ -1,36 +1,16 @@
-# CMPT 145 Course material
-# Copyright (c) 2017-2020 Michael C Horsch
-# All rights reserved.
-#
-# This document contains resources for homework assigned to students of
-# CMPT 145 and shall not be distributed without permission.  Posting this 
-# file to a public or private website, or providing this file to a person 
-# not registered in CMPT 145, constitutes Academic Misconduct, according 
-# to the University of Saskatchewan Policy on Academic Misconduct.
-# 
-# Synopsis:
-#   Implements the Stack ADT
-#
-# A stack (also called a pushdown or LIFO stack) is a compound 
-# data structure in which the data values are ordered according 
-# to the LIFO (last-in first-out) protocol.
-#
-# Implementation:
-# This implementation uses the linked node structure.
-
+"""
+    Name: Allen Keettikkal
+    NSID: alk423
+    Student Number: 11278995
+    Instructor: Jeffrey Long
+"""
 
 import Node as N
 
 
-class Stack(object):
-
+class Container(object):
     def __init__(self):
-        """
-        Purpose
-            creates an empty stack
-        """
-        self.__size = 0  # how many elements in the stack
-        self.__top = None  # the node chain starts here
+        self._size = 0  # how many elements in the stack
 
     def size(self):
         """
@@ -39,7 +19,7 @@ class Stack(object):
         Return:
             The number of data values in the stack
         """
-        return self.__size
+        return self._size
 
     def is_empty(self):
         """
@@ -48,7 +28,13 @@ class Stack(object):
         Return:
             True if the stack has no data, or false otherwise
         """
-        return self.__size == 0
+        return self._size == 0
+
+
+class Stack(Container):
+    def __init__(self):
+        Container.__init__(self)
+        self.__top = None
 
     def push(self, value):
         """
@@ -63,7 +49,7 @@ class Stack(object):
         """
         new_node = N.Node(value, self.__top)
         self.__top = new_node
-        self.__size += 1
+        self._size += 1
 
     def pop(self):
         """
@@ -80,7 +66,7 @@ class Stack(object):
         prev_first_node = self.__top
         result = prev_first_node.get_data()
         self.__top = prev_first_node.get_next()
-        self.__size -= 1
+        self._size -= 1
         return result
 
     def peek(self):

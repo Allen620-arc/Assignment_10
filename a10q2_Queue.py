@@ -1,59 +1,41 @@
-# CMPT 145 Course material
-# Copyright (c) 2017-2020 Michael C Horsch
-# All rights reserved.
-#
-# This document contains resources for homework assigned to students of
-# CMPT 145 and shall not be distributed without permission.  Posting this 
-# file to a public or private website, or providing this file to a person 
-# not registered in CMPT 145, constitutes Academic Misconduct, according 
-# to the University of Saskatchewan Policy on Academic Misconduct.
-# 
-# Synopsis:
-#   Implements the Queue ADT
-#
-# A queue (also called a FIFO queue) is a compound data 
-# structure in which the data values are ordered according to 
-# the FIFO (first-in first-out) protocol.
-#
-# Implementation notes:
-# This implementation uses the linked node structure.
-
+"""
+    Name: Allen Keettikkal
+    NSID: alk423
+    Student Number: 11278995
+    Instructor: Jeffrey Long
+"""
 
 import Node as N
 
-class Queue(object):
 
+class Container(object):
     def __init__(self):
-        """
-        Purpose
-            creates an empty queue
-        """
-        self.__size = 0      # how many elements in the queue
-        self.__front = None  # the node chain starts here
-        self.__back = None   # the node chain ends here
-
+        self._size = 0  # how many elements in the stack
 
     def size(self):
         """
         Purpose
-            returns the number of data values in the queue
-        Pre-conditions:
-            queue: a queue created by create()
+            returns the number of data values in the stack
         Return:
-            The number of data values in the queue
+            The number of data values in the stack
         """
-        return self.__size
-
+        return self._size
 
     def is_empty(self):
         """
         Purpose
-            checks if the given queue has no data in it
+            checks if the stack has no data in it
         Return:
-            True if the queue has no data, or false otherwise
+            True if the stack has no data, or false otherwise
         """
-        return self.__size == 0
+        return self._size == 0
 
+
+class Queue(Container):
+    def __init__(self):
+        Container.__init__(self)
+        self.__front = None  # the node chain starts here
+        self.__back = None  # the node chain ends here
 
     def enqueue(self, value):
         """
@@ -66,7 +48,7 @@ class Queue(object):
         Return:
             (none)
         """
-        new_node = N.node(value, None)
+        new_node = N.Node(value, None)
 
         if self.is_empty():
             self.__front = new_node
@@ -76,9 +58,7 @@ class Queue(object):
             prev_last_node.set_next(new_node)
             self.__back = new_node
 
-        self.__size += 1
-
-
+        self._size += 1
 
     def dequeue(self):
         """
@@ -95,11 +75,10 @@ class Queue(object):
         prev_first_node = self.__front
         result = prev_first_node.get_data()
         self.__front = prev_first_node.get_next()
-        self.__size -= 1
-        if self.__size == 0:
+        self._size -= 1
+        if self.size == 0:
             self.__back = None
         return result
-
 
     def peek(self):
         """
