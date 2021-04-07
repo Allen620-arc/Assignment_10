@@ -17,6 +17,7 @@ class MobilityProfile(object):
         Post-condition: A mobility profile is created
         Return: None
         """
+        self.profile = None
         self.aList = aList
 
     def create_profile(self, aList):

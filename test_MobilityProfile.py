@@ -12,7 +12,8 @@
 
 
 import MobilityProfile as MP
-import LocationNode as LN 
+import LocationNode as LN
+
 
 def str_form(obj, result, exp, reason):
     """
@@ -24,14 +25,16 @@ def str_form(obj, result, exp, reason):
         :param reason: a string
     :return: a string
     """
-    return ' '.join(['Test fault:',obj,
-                     'returned',str(result),
-                     '(expected:', str(exp)+')',
-                     'on:',reason])
+    return ' '.join(['Test fault:', obj,
+                     'returned', str(result),
+                     '(expected:', str(exp) + ')',
+                     'on:', reason])
+
 
 def test_0():
     alocation = LN.LocationNode()
     assert isinstance(alocation, LN.LocationNode), 'Test fault: __init__ failed'
+
 
 def test_1():
     test_objective = 'set_current_location(), get_current_location()'
@@ -41,6 +44,7 @@ def test_1():
     result = alocation.get_current_location()
     expected = 'Airport'
     assert result == expected, str_form(test_objective, result, expected, reason)
+
 
 def test_2():
     test_objective = 'set_next_location()'
@@ -52,6 +56,7 @@ def test_2():
     result = alocation.get_next_location()
     expected = nextLocation
     assert result == expected, str_form(test_objective, result, expected, reason)
+
 
 def test_3():
     test_objective = 'set_current_location() value'
@@ -65,6 +70,7 @@ def test_3():
     expected = 'Bar'
     assert result == expected, str_form(test_objective, result, expected, reason)
 
+
 def test_4():
     test_objective = 'create location using __init__'
     reason = 'use __init__ to create new location node'
@@ -73,159 +79,175 @@ def test_4():
     expected = 'Airport'
     assert result == expected, str_form(test_objective, result, expected, reason)
 
+
 def test_5():
     patient = MP.MobilityProfile()
     assert isinstance(patient, MP.MobilityProfile), 'Test fault: __init__ failed'
 
+
 def test_6():
     test_objective = 'create mobility profile using __init__'
     reason = 'use __init__ to create new mobility profile'
-    alist = ['Airport','Cafe','Supermart','University','Bar']
+    alist = ['Airport', 'Cafe', 'Supermart', 'University', 'Bar']
     patient = MP.MobilityProfile(alist)
     result = patient.profile.to_string()
     expected = '[ Airport | *-]-->[ Cafe | *-]-->[ Supermart | *-]-->[ University | *-]-->[ Bar | / ]'
     assert result == expected, str_form(test_objective, result, expected, reason)
-    
+
+
 def test_7():
     test_objective = 'create_profile()'
     reason = 'Create new mobility profile'
-    alist = ['Airport','Cafe','Supermart','University','Bar']
+    alist = ['Airport', 'Cafe', 'Supermart', 'University', 'Bar']
     patient = MP.MobilityProfile()
     patient.create_profile(alist)
     result = patient.profile.to_string()
     expected = '[ Airport | *-]-->[ Cafe | *-]-->[ Supermart | *-]-->[ University | *-]-->[ Bar | / ]'
     assert result == expected, str_form(test_objective, result, expected, reason)
 
+
 def test_8():
     test_objective = 'create_profile()'
     reason = 'Create new mobility profile'
-    alist = ['Cafe','Cafe','Cafe','Cafe','Cafe']
+    alist = ['Cafe', 'Cafe', 'Cafe', 'Cafe', 'Cafe']
     patient = MP.MobilityProfile()
     patient.create_profile(alist)
     result = patient.profile.to_string()
     expected = '[ Cafe | *-]-->[ Cafe | *-]-->[ Cafe | *-]-->[ Cafe | *-]-->[ Cafe | / ]'
     assert result == expected, str_form(test_objective, result, expected, reason)
 
+
 def test_9():
     test_objective = 'compare_profile()'
     reason = 'Both mobility profiles are identical'
-    alist = ['Airport','Cafe','Supermart','University','Bar']
-    blist = ['Airport','Cafe','Supermart','University','Bar']
+    alist = ['Airport', 'Cafe', 'Supermart', 'University', 'Bar']
+    blist = ['Airport', 'Cafe', 'Supermart', 'University', 'Bar']
     patient = MP.MobilityProfile(alist)
     user = MP.MobilityProfile(blist)
     result = patient.compare_profile(user)
     expected = True
-    assert result == expected, str_form(test_objective, result, expected, reason)    
+    assert result == expected, str_form(test_objective, result, expected, reason)
+
 
 def test_10():
     test_objective = 'compare_profile()'
     reason = 'Mobility profiles have same location but visit at different time'
-    alist = ['Airport','Cafe','Supermart','University','Bar']
-    blist = ['Cafe','Airport','University','Bar','Supermart']
+    alist = ['Airport', 'Cafe', 'Supermart', 'University', 'Bar']
+    blist = ['Cafe', 'Airport', 'University', 'Bar', 'Supermart']
     patient = MP.MobilityProfile(alist)
     user = MP.MobilityProfile(blist)
     result = patient.compare_profile(user)
     expected = False
     assert result == expected, str_form(test_objective, result, expected, reason)
+
 
 def test_11():
     test_objective = 'compare_profile()'
     reason = 'Mobility profiles have visited one location at same time'
-    alist = ['Airport','Cafe','Supermart','University','Bar']
-    blist = ['Cafe','Airport','Supermart','Bar','University']
+    alist = ['Airport', 'Cafe', 'Supermart', 'University', 'Bar']
+    blist = ['Cafe', 'Airport', 'Supermart', 'Bar', 'University']
     patient = MP.MobilityProfile(alist)
     user = MP.MobilityProfile(blist)
     result = patient.compare_profile(user)
     expected = True
     assert result == expected, str_form(test_objective, result, expected, reason)
+
 
 def test_12():
     test_objective = 'compare_profile()'
     reason = 'Mobility profiles have visited multiple locations at same time'
-    alist = ['Airport','Cafe','Supermart','University','Bar']
-    blist = ['Cafe','Airport','Supermart','University','Bar']
+    alist = ['Airport', 'Cafe', 'Supermart', 'University', 'Bar']
+    blist = ['Cafe', 'Airport', 'Supermart', 'University', 'Bar']
     patient = MP.MobilityProfile(alist)
     user = MP.MobilityProfile(blist)
     result = patient.compare_profile(user)
     expected = True
     assert result == expected, str_form(test_objective, result, expected, reason)
+
 
 def test_13():
     test_objective = 'compare_profile()'
     reason = 'Mobility profiles have visited multiple locations at same time'
-    alist = ['Airport','Cafe','Supermart','University','Bar']
-    blist = ['Cafe','Airport','Supermart','Gym','Bar']
+    alist = ['Airport', 'Cafe', 'Supermart', 'University', 'Bar']
+    blist = ['Cafe', 'Airport', 'Supermart', 'Gym', 'Bar']
     patient = MP.MobilityProfile(alist)
     user = MP.MobilityProfile(blist)
     result = patient.compare_profile(user)
     expected = True
     assert result == expected, str_form(test_objective, result, expected, reason)
+
 
 def test_14():
     test_objective = 'compare_profile()'
     reason = 'Mobility profiles have different locations'
-    alist = ['Airport','Cafe','Supermart','University','Bar']
-    blist = ['Supermart','Airport','Gym','Gym','Gym']
+    alist = ['Airport', 'Cafe', 'Supermart', 'University', 'Bar']
+    blist = ['Supermart', 'Airport', 'Gym', 'Gym', 'Gym']
     patient = MP.MobilityProfile(alist)
     user = MP.MobilityProfile(blist)
     result = patient.compare_profile(user)
     expected = False
     assert result == expected, str_form(test_objective, result, expected, reason)
+
 
 def test_15():
     test_objective = 'compare_profile()'
     reason = 'Mobility profiles have different locations'
-    alist = ['Cafe','Cafe','Cafe','Cafe','Cafe']
-    blist = ['Gym','Gym','Gym','Gym','Gym']
+    alist = ['Cafe', 'Cafe', 'Cafe', 'Cafe', 'Cafe']
+    blist = ['Gym', 'Gym', 'Gym', 'Gym', 'Gym']
     patient = MP.MobilityProfile(alist)
     user = MP.MobilityProfile(blist)
     result = patient.compare_profile(user)
     expected = False
     assert result == expected, str_form(test_objective, result, expected, reason)
 
+
 def test_16():
     test_objective = 'compare_profile()'
     reason = 'Mobility profiles visited same last location'
-    alist = ['Airport','Cafe','Supermart','University','Bar']
-    blist = ['Cafe','Gym','University','Supermart','Bar']
+    alist = ['Airport', 'Cafe', 'Supermart', 'University', 'Bar']
+    blist = ['Cafe', 'Gym', 'University', 'Supermart', 'Bar']
     patient = MP.MobilityProfile(alist)
     user = MP.MobilityProfile(blist)
     result = patient.compare_profile(user)
     expected = True
     assert result == expected, str_form(test_objective, result, expected, reason)
+
 
 def test_17():
     test_objective = 'compare_profile()'
     reason = 'Mobility profiles visited same first location'
-    alist = ['Airport','Cafe','Supermart','University','Bar']
-    blist = ['Airport','Gym','University','Supermart','Cafe']
+    alist = ['Airport', 'Cafe', 'Supermart', 'University', 'Bar']
+    blist = ['Airport', 'Gym', 'University', 'Supermart', 'Cafe']
     patient = MP.MobilityProfile(alist)
     user = MP.MobilityProfile(blist)
     result = patient.compare_profile(user)
     expected = True
     assert result == expected, str_form(test_objective, result, expected, reason)
+
 
 def test_18():
     test_objective = 'compare_profile()'
     reason = 'Mobility profiles visited same first location'
-    alist = ['Airport','Hospital','Hospital','Hospital','Hospital']
-    blist = ['Airport','University','University','Cafe','Cafe']
+    alist = ['Airport', 'Hospital', 'Hospital', 'Hospital', 'Hospital']
+    blist = ['Airport', 'University', 'University', 'Cafe', 'Cafe']
     patient = MP.MobilityProfile(alist)
     user = MP.MobilityProfile(blist)
     result = patient.compare_profile(user)
     expected = True
     assert result == expected, str_form(test_objective, result, expected, reason)
 
+
 def test_19():
     test_objective = 'compare_profile()'
     reason = 'Mobility profiles visited one location at same time'
-    alist = ['Hospital','Hospital','Hospital','Hospital','Hospital']
-    blist = ['University','Gym','Hospital','Supermart','Cafe']
+    alist = ['Hospital', 'Hospital', 'Hospital', 'Hospital', 'Hospital']
+    blist = ['University', 'Gym', 'Hospital', 'Supermart', 'Cafe']
     patient = MP.MobilityProfile(alist)
     user = MP.MobilityProfile(blist)
     result = patient.compare_profile(user)
     expected = True
     assert result == expected, str_form(test_objective, result, expected, reason)
+
 
 if __name__ == "__main__":
     all_of_em = [
@@ -255,7 +277,7 @@ if __name__ == "__main__":
     failed = 0
     for t in reversed(all_of_em):
         count += 1
-        try: 
+        try:
             t()
         except Exception as e:
             print("Test failure in function:", t.__name__)
@@ -265,4 +287,5 @@ if __name__ == "__main__":
 
     print('Passed', count - failed, 'out of total', count, 'tests')
     if failed > 2:
-        print('***Note***\nThe tests were executed in reverse order, so you can\nmore easily see the first test failures.')
+        print(
+            '***Note***\nThe tests were executed in reverse order, so you can\nmore easily see the first test failures.')

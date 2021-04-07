@@ -29,6 +29,7 @@ class LocationNode(N.SuperNode):
         Return:
             returns current location stored in the node, or None if it is empty
         """
+        return self.data
 
     def get_next_location(self):
         """
@@ -41,6 +42,7 @@ class LocationNode(N.SuperNode):
         Return:
             returns the next location node , or None if it is empty
         """
+        return self.next
 
     def set_current_location(self, value):
         """
@@ -53,6 +55,8 @@ class LocationNode(N.SuperNode):
         Return:
             None
         """
+        self.data = value
+        return self.data
 
     def set_next_location(self, next_location):
         """
@@ -65,6 +69,8 @@ class LocationNode(N.SuperNode):
         Return:
             None
         """
+        self.next = next_location
+        return self.next
 
     def to_string(self):
         """
