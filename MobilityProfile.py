@@ -17,8 +17,10 @@ class MobilityProfile(object):
         Post-condition: A mobility profile is created
         Return: None
         """
-        self.profile = None
-        self.aList = aList
+        if aList is None:
+            self.profile = None
+        else:
+            self.create_profile(aList)
 
     def create_profile(self, aList):
         """
@@ -31,6 +33,21 @@ class MobilityProfile(object):
             A mobility profile is created
         Return: None
         """
+        node_1 = LN.LocationNode()
+        node_2 = LN.LocationNode()
+        node_3 = LN.LocationNode()
+        node_4 = LN.LocationNode()
+        node_5 = LN.LocationNode()
+        node_1.set_data(aList[0])
+        node_2.set_data(aList[1])
+        node_1.set_next(node_2)
+        node_3.set_data(aList[2])
+        node_2.set_next(node_3)
+        node_4.set_data(aList[3])
+        node_3.set_next(node_4)
+        node_5.set_data(aList[4])
+        node_4.set_next(node_5)
+        self.profile = node_1
 
     def compare_profile(self, otherProfile):
         """
@@ -43,3 +60,12 @@ class MobilityProfile(object):
             None
         Return: True if there is a match, False for otherwise.
         """
+        if self.profile.get_current_location() == otherProfile.profile.get_current_location():
+            return True
+        else:
+            while self.profile is not None or otherProfile.profile is not None:
+                if self.profile.get_next_location() == otherProfile.profile.get_next_location():
+                    return True
+                self.profile = self.profile.get_next_location()
+                otherProfile.profile = otherProfile.profile.get_next_location()
+            return False

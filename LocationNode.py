@@ -88,12 +88,12 @@ class LocationNode(N.SuperNode):
             walker = self
             walker.get_current_location()
 
-            result = '[ ' + str(value) + ' |'
+            result = '[ ' + str(walker.get_current_location()) + ' |'
             while walker.get_next_location() is not None:
                 walker.get_next_location()
                 walker.get_current_location()
 
-                result += ' *-]-->[ ' + str(value) + ' |'
+                result += ' *-]-->[ ' + str(walker.get_current_location()) + ' |'
 
             result += ' / ]'
 

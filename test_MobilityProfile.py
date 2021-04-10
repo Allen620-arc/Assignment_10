@@ -81,7 +81,7 @@ def test_4():
 
 
 def test_5():
-    patient = MP.MobilityProfile()
+    patient = MP.MobilityProfile(None)
     assert isinstance(patient, MP.MobilityProfile), 'Test fault: __init__ failed'
 
 
